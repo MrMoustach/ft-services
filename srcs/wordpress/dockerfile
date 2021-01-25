@@ -1,0 +1,6 @@
+FROM alpine:latest
+EXPOSE 80
+RUN  apk add nginx php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
+RUN mkdir -p /run/nginx
+COPY default.conf /etc/nginx/conf.d
+RUN nginx

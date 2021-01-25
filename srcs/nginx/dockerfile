@@ -1,3 +1,4 @@
-FROM alpine
-run apk update && apk upgrade
-run apk add nginx
+FROM alpine:latest
+RUN apk update && apk upgrade
+RUN apk add nginx
+RUN mkdir -r /run/nginx
