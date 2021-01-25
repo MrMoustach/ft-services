@@ -1,0 +1,3 @@
+FROM alpine
+run apk update && apk upgrade
+run apk add nginx
