@@ -1,6 +1,19 @@
 FROM alpine:latest
 EXPOSE 80
+VOLUME [ “/sys/fs/cgroup” ]
 RUN  apk add nginx php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
+RUN apk update \
+    && apk add --no-cache openssh-server openrc git rsync \
+    && mkdir -p /run/openrc \
+    && touch /run/openrc/softlevel \
+    && mkdir /repos /repos-backup \
+    && sed -ie "s/#PubkeyAuthentication/PubkeyAuthentication/g" /etc/ssh/sshd_config \
+    && sed -ie "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config \
+    && echo "0 5 * * * cd /repos ;for i in $(ls); do echo -n '$i : ' ;git -C $i pull 2>/dev/null ;done" > /etc/crontabs/root \
+    && echo "30 5 * * * rsync -qr /repos/* /repos-backup" > /etc/crontabs/root\
 RUN mkdir -p /run/nginx
+RUN openrc default 
+RUN rc-update
 COPY default.conf /etc/nginx/conf.d
-RUN nginx
+COPY php.ini /etc/php7/php.ini
+RUN apk add rsyslog
