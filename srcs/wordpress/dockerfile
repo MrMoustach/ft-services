@@ -1,6 +1,6 @@
 FROM alpine:latest
-EXPOSE 80
-VOLUME [ “/sys/fs/cgroup” ]
+EXPOSE 5050
+#VOLUME [ “/sys/fs/cgroup” ]
 RUN  apk add nginx php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
 RUN apk update \
     && apk add --no-cache openssh-server openrc git rsync \
@@ -10,7 +10,6 @@ RUN mkdir -p /run/nginx
 RUN openrc default 
 RUN rc-update
 COPY default.conf /etc/nginx/conf.d
-COPY php.ini /etc/php7/php.ini
 RUN apk add rsyslog
 RUN rc-update add local default
 COPY startup.sh /
