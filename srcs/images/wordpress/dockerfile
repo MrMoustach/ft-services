@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM alpine:3.12
 EXPOSE 5050
-#VOLUME [ “/sys/fs/cgroup” ]
+VOLUME [ “/sys/fs/cgroup” ]
 RUN  apk add nginx php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl
 RUN apk update \
     && apk add --no-cache openssh-server openrc git rsync \
