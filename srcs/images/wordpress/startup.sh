@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/sh
 rc-service php-fpm7 start
 rc-service nginx start
-ash
+top
