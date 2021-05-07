@@ -1,0 +1,19 @@
+FROM alpine:3.12
+EXPOSE 5000
+VOLUME [ “/sys/fs/cgroup” ]
+RUN  apk add nginx php7-cli php7-fpm php7-json php7-pdo php7-mysqli php7-zip php7-gd  php7-mbstring php7-curl php7-xml php7-bcmath php7-json php7-iconv php7-session
+RUN apk update \
+    && apk add --no-cache openssh-server openrc git rsync \
+    && mkdir -p /run/openrc \
+    && touch /run/openrc/softlevel 
+RUN mkdir -p /run/nginx
+RUN openrc default 
+RUN rc-update
+COPY default.conf /etc/nginx/conf.d
+RUN apk add rsyslog
+RUN rc-update add local default
+COPY startup.sh /
+RUN chmod +x startup.sh
+RUN mkdir -p /data/
+COPY phpmyadmin /data/www
+ENTRYPOINT [ "./startup.sh" ]

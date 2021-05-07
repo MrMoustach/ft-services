@@ -9,3 +9,5 @@ service mariadb stop
 service mariadb setup
 service mariadb restart
 mysql -u root -e "CREATE USER 'iharchi'@'localhost' IDENTIFIED BY 'wppassword';"
+mysql -u root -e "CREATE DATABASE wordpress;"
+mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO iharchi@localhost; FLUSH PRIVILEGES;"

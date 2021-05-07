@@ -12,4 +12,4 @@ RUN chmod +x /temp/config.sh
 RUN ./temp/config.sh
 
 
-CMD ["sh"]
+CMD ["top"]
