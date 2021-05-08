@@ -8,6 +8,6 @@ chown -R mysql: /var/lib/mysql
 service mariadb stop
 service mariadb setup
 service mariadb restart
-mysql -u root -e "CREATE USER 'iharchi'@'localhost' IDENTIFIED BY 'wppassword';"
-mysql -u root -e "CREATE DATABASE wordpress;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO iharchi@localhost; FLUSH PRIVILEGES;"
+mysql -u root -e "CREATE USER 'iharchi'@'%' IDENTIFIED BY 'wppassword';"
+mysql -u root -e "CREATE DATABASE wordpress; use wordpress; source wordpress.sql;"
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'iharchi'@'%'; FLUSH PRIVILEGES;"

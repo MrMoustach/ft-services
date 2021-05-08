@@ -32,6 +32,6 @@ spec:
     app: phpmyadmin
   type: LoadBalancer
   ports:
-    - protocol: TCP
+    - name: phpmyadmin
       port: 5000
       targetPort: 5000

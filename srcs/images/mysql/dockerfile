@@ -1,5 +1,5 @@
 FROM alpine:3.12
-EXPOSE 3000
+EXPOSE 3306
 VOLUME [ “/sys/fs/cgroup” ]
 RUN apk --no-cache add mariadb mariadb-common mariadb-client
 RUN apk update \
@@ -8,8 +8,12 @@ RUN apk update \
     && touch /run/openrc/softlevel 
 RUN mkdir /temp
 COPY config.sh /temp/config.sh
+COPY start.sh /temp/start.sh
+COPY wordpress.sql /temp/wordpress.sql
+COPY my.cnf /etc/
 RUN chmod +x /temp/config.sh
+RUN chmod +x /temp/start.sh
 RUN ./temp/config.sh
 
 
-CMD ["top"]
+CMD ["./temp/start.sh"]
