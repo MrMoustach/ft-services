@@ -1,14 +1,13 @@
 FROM alpine:3.12
-EXPOSE 80
-EXPOSE 443
 VOLUME [ “/sys/fs/cgroup” ]
 RUN mkdir /temp
 COPY config.sh /temp/config.sh
 RUN chmod +x /temp/config.sh
 RUN ./temp/config.sh
-COPY default.conf /etc/nginx/conf.d
+RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories&&\
+    apk update&&\
+    apk add pure-ftpd@testing="1.0.49-r2"
 RUN apk add rsyslog
 COPY startup.sh /
-COPY sshd_config /etc/ssh/
 RUN chmod +x startup.sh
 ENTRYPOINT [ "./startup.sh" ]

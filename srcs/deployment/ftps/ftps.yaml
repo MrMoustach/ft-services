@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata: 
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: ftps
+        imagePullPolicy: Never
+        ports:
+          - name : "ftps"
+            containerPort: 21
+          - name : "ftp"
+            containerPort: 20
+          - name: "ftps-1"
+            containerPort: 21011
+          - name: "ftps-2"
+            containerPort: 21012
+          - name: "ftps-3"
+            containerPort: 21013
+          - name: "ftps-4"
+            containerPort: 21014
+          - name: "ftps-5"
+            containerPort: 21015
+          - name: "ftps-6"
+            containerPort: 21016
+          - name: "ftps-7"
+            containerPort: 21017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps-service
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+spec:
+  selector:
+    app: ftps
+  ports:
+      - name: "ftps"
+        port: 21
+      - name: "ftp"
+        port: 20
+        targetPort: 21
+      - name: "ftps-1"
+        port: 21011
+        targetPort: 21011
+      - name: "ftps-2"
+        port: 21012
+        targetPort: 21012
+      - name: "ftps-3"
+        port: 21013
+        targetPort: 21013
+      - name: "ftps-4"
+        port: 21014
+        targetPort: 21014
+      - name: "ftps-5"
+        port: 21015
+        targetPort: 21015
+      - name: "ftps-6"
+        port: 21016
+        targetPort: 21016
+      - name: "ftps-7"
+        port: 21017
+        targetPort: 21017
+  type: LoadBalancer
