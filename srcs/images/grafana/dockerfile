@@ -1,13 +1,11 @@
 FROM alpine:3.12
 VOLUME [ “/sys/fs/cgroup” ]
-RUN apk update&&\
-    apk add influxdb
+RUN apk update
 RUN mkdir /temp
 COPY config.sh /temp/config.sh
 RUN chmod +x /temp/config.sh
 RUN ./temp/config.sh
 RUN apk add rsyslog
 COPY startup.sh /
-COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
 RUN chmod +x startup.sh
 ENTRYPOINT [ "./startup.sh" ]

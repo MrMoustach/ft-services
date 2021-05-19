@@ -1,9 +1,6 @@
 #!/bin/sh
 apk update 
 apk add --no-cache openssl openrc git rsync \
-# echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
-# apk update
-# apk add pure-ftpd@testing="1.0.49-r2"
 mkdir -p /run/openrc \
 touch /run/openrc/softlevel 
 openrc default 
