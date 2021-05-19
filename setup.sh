@@ -61,6 +61,14 @@ else
   echo "\e[31Building FTPS failed ❌\e[39m"
 fi
 
+docker build srcs/images/influxdb -t influxdb > /dev/null
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+  echo "\e[32mInfluxDB is built ✅\e[39m"
+else
+  echo "\e[31Building InfluxDB failed ❌\e[39m"
+fi
+
 echo "- \e[32mSetting up Metal-lb 🤩\e[39m"
 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml > /dev/null
@@ -75,6 +83,7 @@ kubectl apply -f srcs/deployment/phpmyadmin/phpmyadmin.yaml > /dev/null
 kubectl apply -f srcs/deployment/mysql/mysql.yaml > /dev/null
 kubectl apply -f srcs/deployment/nginx/nginx.yaml > /dev/null
 kubectl apply -f srcs/deployment/ftps/ftps.yaml > /dev/null
+kubectl apply -f srcs/deployment/influxdb/influxdb.yaml > /dev/null
 echo "- \e[32mFinishing up and starting dashboard 🥳🥳\e[39m"
 
 minikube dashboard
