@@ -1,11 +1,6 @@
 FROM alpine:3.12
 EXPOSE 3306
 VOLUME [ “/sys/fs/cgroup” ]
-RUN apk --no-cache add mariadb mariadb-common mariadb-client
-RUN apk update \
-    && apk add --no-cache openssh-server openrc git rsync \
-    && mkdir -p /run/openrc \
-    && touch /run/openrc/softlevel 
 RUN mkdir /temp
 COPY config.sh /temp/config.sh
 COPY start.sh /temp/start.sh
