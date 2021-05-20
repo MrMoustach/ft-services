@@ -12,3 +12,8 @@ echo "creating db"
 mysql -u root -e "CREATE USER 'iharchi'@'%' IDENTIFIED BY 'wppassword';"
 mysql -u root -e "CREATE DATABASE wordpress; use wordpress; source /temp/wordpress.sql;SELECT * from user"
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'iharchi'@'%'; FLUSH PRIVILEGES;"
+
+apk add libc6-compat
+
+wget https://dl.influxdata.com/telegraf/releases/telegraf-1.18.2_linux_amd64.tar.gz
+tar xf telegraf-1.18.2_linux_amd64.tar.gz

@@ -8,4 +8,6 @@ RUN ./temp/config.sh
 RUN apk add rsyslog
 COPY startup.sh /
 RUN chmod +x startup.sh
+COPY grafana.db /grafana-7.5.6/data
+COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
 ENTRYPOINT [ "./startup.sh" ]

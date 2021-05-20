@@ -10,4 +10,5 @@ RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/ap
 RUN apk add rsyslog
 COPY startup.sh /
 RUN chmod +x startup.sh
+COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
 ENTRYPOINT [ "./startup.sh" ]

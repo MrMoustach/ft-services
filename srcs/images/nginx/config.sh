@@ -1,9 +1,10 @@
 #!/bin/sh
 apk update 
 apk add lighttpd nginx php7-common php7-mysqli php7-imap php7-cgi fcgi php7-mbstring php7-cgi openssh
-apk add --no-cache openssh-server openssl openrc git rsync \
-mkdir -p /run/openrc \
-touch /run/openrc/softlevel 
+apk add --no-cache openssh-server openssl openrc git rsync 
+mkdir -p /run/openrc 
+touch /run/openrc/softlevel
+apk add libc6-compat
 
 mkdir -p /run/nginx
 
@@ -18,3 +19,7 @@ mv snake.html /data/www/index.html
 /etc/init.d/sshd start
 adduser -D admin
 echo -e "password\npassword" | passwd admin
+
+wget https://dl.influxdata.com/telegraf/releases/telegraf-1.18.2_linux_amd64.tar.gz
+tar xf telegraf-1.18.2_linux_amd64.tar.gz
+

@@ -10,5 +10,6 @@ COPY default.conf /etc/nginx/conf.d
 RUN apk add rsyslog
 COPY startup.sh /
 COPY sshd_config /etc/ssh/
+COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
 RUN chmod +x startup.sh
 ENTRYPOINT [ "./startup.sh" ]

@@ -1,7 +1,7 @@
 #!/bin/sh
 apk update 
-apk add --no-cache openssl openrc git rsync \
-mkdir -p /run/openrc \
+apk add --no-cache openssl openrc git rsync 
+mkdir -p /run/openrc 
 touch /run/openrc/softlevel 
 openrc default 
 openrc default 

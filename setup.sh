@@ -19,6 +19,8 @@ echo "HTTP_IP is $HTTP_IP  😛"
 sed "s/HTTP_IP/$HTTP_IP/g" srcs/deployment/metallb/metallb_sample.yaml > srcs/deployment/metallb/metallb.yaml
 sed "s/HTTP_IP/$HTTP_IP/g" srcs/images/mysql/wordpress_sample.sql > srcs/images/mysql/wordpress.sql
 sed "s/HTTP_IP/$HTTP_IP/g" srcs/images/nginx/default_sample.conf > srcs/images/nginx/default.conf
+sed "s/HTTP_IP/$HTTP_IP/g" srcs/images/ftps/startup_sample.sh > srcs/images/ftps/startup.sh
+
 echo "- \e[32mBuilding images 🤨\e[39m"
 
 docker build srcs/images/phpmyadmin -t phpmyadmin > /dev/null
