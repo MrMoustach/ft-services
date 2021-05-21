@@ -15,6 +15,12 @@ spec:
       - name: wordpress
         image: wp
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - ./doctor.sh
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
           - name: "wordpress-http"
             containerPort: 5050

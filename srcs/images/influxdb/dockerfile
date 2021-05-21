@@ -10,4 +10,6 @@ RUN apk add rsyslog
 COPY startup.sh /
 COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
 RUN chmod +x startup.sh
+COPY doctor.sh /doctor.sh
+RUN chmod +x doctor.sh
 ENTRYPOINT [ "./startup.sh" ]

@@ -4,15 +4,15 @@ apk update
 apk add --no-cache openssh-server openrc git rsync 
 mkdir -p /run/openrc 
 touch /run/openrc/softlevel 
-mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+# mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 openrc default 
 rc-update
 apk add rsyslog
 rc-update add local default
-chown -R mysql: /var/lib/mysql
-service mariadb stop
-service mariadb setup
-service mariadb restart
+# chown -R mysql: /var/lib/mysql
+# service mariadb stop
+# service mariadb setup
+# service mariadb restart
 
 
 apk add libc6-compat

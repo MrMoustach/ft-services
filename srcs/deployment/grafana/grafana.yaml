@@ -15,6 +15,12 @@ spec:
       - name: grafana
         image: grafana
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - ./doctor.sh
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
           - name: "grafana-http"
             containerPort: 3000

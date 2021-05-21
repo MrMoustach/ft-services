@@ -3,13 +3,14 @@ EXPOSE 3306
 VOLUME [ “/sys/fs/cgroup” ]
 RUN mkdir /temp
 COPY config.sh /temp/config.sh
-COPY start.sh /temp/start.sh
-COPY wordpress.sql /temp/wordpress.sql
 COPY my.cnf /etc/
 RUN chmod +x /temp/config.sh
-RUN chmod +x /temp/start.sh
+COPY wordpress.sql /temp/wordpress.sql
 RUN ./temp/config.sh
+COPY start.sh /temp/start.sh
+RUN chmod +x /temp/start.sh
 COPY telegraf.conf /telegraf-1.18.2/etc/telegraf/
-
+COPY doctor.sh /doctor.sh
+RUN chmod +x doctor.sh
 
 CMD ["./temp/start.sh"]

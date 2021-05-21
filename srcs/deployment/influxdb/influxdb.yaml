@@ -18,6 +18,12 @@ spec:
       - name: influxdb
         image: influxdb:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - ./doctor.sh
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
         - containerPort: 8086
         volumeMounts:

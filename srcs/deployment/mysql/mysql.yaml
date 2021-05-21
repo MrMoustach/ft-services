@@ -31,6 +31,12 @@ spec:
       - name: mysql
         image: mysql:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - ./doctor.sh
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
         - containerPort: 3306
         volumeMounts:

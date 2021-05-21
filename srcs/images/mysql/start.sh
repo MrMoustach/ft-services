@@ -1,4 +1,6 @@
 #!/bin/sh
+chown -R mysql: /var/lib/mysql
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql --disable-log-bin
 service mariadb setup
 service mariadb restart
 echo "creating db"
