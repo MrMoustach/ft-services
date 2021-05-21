@@ -9,7 +9,7 @@ echo '
 |_|  \__|    |___/\___|_|    \_/ |_|\___\___||___/'
 echo "- \e[32mSetting up minikube 😆\e[39m"
 minikube delete > /dev/null
-minikube start --driver=virtualbox
+minikube start --driver=virtualbox --memory=3Gi
 eval $(minikube docker-env)
 echo "- \e[32msetting up files 🙃\e[39m"
 
