@@ -31,7 +31,7 @@ else
   echo "\e[31Building phpmyadmin failed ❌\e[39m"
 fi
 
-docker build srcs/images/wordpress -t wp > /dev/null
+docker build srcs/images/wordpress -t wordpress > /dev/null
 RESULT=$?
 if [ $RESULT -eq 0 ]; then
   echo "\e[32mWordpress is built ✅\e[39m"
